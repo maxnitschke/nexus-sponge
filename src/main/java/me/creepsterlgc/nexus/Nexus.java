@@ -1,0 +1,238 @@
+package main.java.me.creepsterlgc.nexus;
+
+import java.io.File;
+import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
+
+import main.java.me.creepsterlgc.nexus.api.NexusAPI;
+import main.java.me.creepsterlgc.nexus.commands.CommandAFK;
+import main.java.me.creepsterlgc.nexus.commands.CommandBan;
+import main.java.me.creepsterlgc.nexus.commands.CommandBanlist;
+import main.java.me.creepsterlgc.nexus.commands.CommandBroadcast;
+import main.java.me.creepsterlgc.nexus.commands.CommandButcher;
+import main.java.me.creepsterlgc.nexus.commands.CommandChannel;
+import main.java.me.creepsterlgc.nexus.commands.CommandNexus;
+import main.java.me.creepsterlgc.nexus.commands.CommandEnchant;
+import main.java.me.creepsterlgc.nexus.commands.CommandFakejoin;
+import main.java.me.creepsterlgc.nexus.commands.CommandFakeleave;
+import main.java.me.creepsterlgc.nexus.commands.CommandFeed;
+import main.java.me.creepsterlgc.nexus.commands.CommandFly;
+import main.java.me.creepsterlgc.nexus.commands.CommandForce;
+import main.java.me.creepsterlgc.nexus.commands.CommandGamemode;
+import main.java.me.creepsterlgc.nexus.commands.CommandGive;
+import main.java.me.creepsterlgc.nexus.commands.CommandHeal;
+import main.java.me.creepsterlgc.nexus.commands.CommandHome;
+import main.java.me.creepsterlgc.nexus.commands.CommandItem;
+import main.java.me.creepsterlgc.nexus.commands.CommandJump;
+import main.java.me.creepsterlgc.nexus.commands.CommandKick;
+import main.java.me.creepsterlgc.nexus.commands.CommandKill;
+import main.java.me.creepsterlgc.nexus.commands.CommandList;
+import main.java.me.creepsterlgc.nexus.commands.CommandMail;
+import main.java.me.creepsterlgc.nexus.commands.CommandMemory;
+import main.java.me.creepsterlgc.nexus.commands.CommandMessage;
+import main.java.me.creepsterlgc.nexus.commands.CommandMotd;
+import main.java.me.creepsterlgc.nexus.commands.CommandMute;
+import main.java.me.creepsterlgc.nexus.commands.CommandNick;
+import main.java.me.creepsterlgc.nexus.commands.CommandOnlinetime;
+import main.java.me.creepsterlgc.nexus.commands.CommandPage;
+import main.java.me.creepsterlgc.nexus.commands.CommandPing;
+import main.java.me.creepsterlgc.nexus.commands.CommandPowertool;
+import main.java.me.creepsterlgc.nexus.commands.CommandRealname;
+import main.java.me.creepsterlgc.nexus.commands.CommandReply;
+import main.java.me.creepsterlgc.nexus.commands.CommandRules;
+import main.java.me.creepsterlgc.nexus.commands.CommandSearchitem;
+import main.java.me.creepsterlgc.nexus.commands.CommandSeen;
+import main.java.me.creepsterlgc.nexus.commands.CommandSpawn;
+import main.java.me.creepsterlgc.nexus.commands.CommandSpeed;
+import main.java.me.creepsterlgc.nexus.commands.CommandTP;
+import main.java.me.creepsterlgc.nexus.commands.CommandTPA;
+import main.java.me.creepsterlgc.nexus.commands.CommandTPAHere;
+import main.java.me.creepsterlgc.nexus.commands.CommandTPAccept;
+import main.java.me.creepsterlgc.nexus.commands.CommandTPDeath;
+import main.java.me.creepsterlgc.nexus.commands.CommandTPDeny;
+import main.java.me.creepsterlgc.nexus.commands.CommandTPHere;
+import main.java.me.creepsterlgc.nexus.commands.CommandTPPos;
+import main.java.me.creepsterlgc.nexus.commands.CommandTPSwap;
+import main.java.me.creepsterlgc.nexus.commands.CommandTPWorld;
+import main.java.me.creepsterlgc.nexus.commands.CommandTempban;
+import main.java.me.creepsterlgc.nexus.commands.CommandTicket;
+import main.java.me.creepsterlgc.nexus.commands.CommandTime;
+import main.java.me.creepsterlgc.nexus.commands.CommandUnban;
+import main.java.me.creepsterlgc.nexus.commands.CommandUnmute;
+import main.java.me.creepsterlgc.nexus.commands.CommandWarp;
+import main.java.me.creepsterlgc.nexus.commands.CommandWeather;
+import main.java.me.creepsterlgc.nexus.commands.CommandWhois;
+import main.java.me.creepsterlgc.nexus.customized.NexusDatabase;
+import main.java.me.creepsterlgc.nexus.customized.NexusPortal;
+import main.java.me.creepsterlgc.nexus.events.EventPlayerChat;
+import main.java.me.creepsterlgc.nexus.events.EventPlayerDamage;
+import main.java.me.creepsterlgc.nexus.events.EventPlayerDeath;
+import main.java.me.creepsterlgc.nexus.events.EventPlayerInteractBlock;
+import main.java.me.creepsterlgc.nexus.events.EventPlayerInteractEntity;
+import main.java.me.creepsterlgc.nexus.events.EventPlayerJoin;
+import main.java.me.creepsterlgc.nexus.events.EventPlayerKick;
+import main.java.me.creepsterlgc.nexus.events.EventPlayerLogin;
+import main.java.me.creepsterlgc.nexus.events.EventPlayerMove;
+import main.java.me.creepsterlgc.nexus.events.EventPlayerQuit;
+import main.java.me.creepsterlgc.nexus.events.EventPlayerRespawn;
+import main.java.me.creepsterlgc.nexus.events.EventSignChange;
+import main.java.me.creepsterlgc.nexus.files.FileChat;
+import main.java.me.creepsterlgc.nexus.files.FileCommands;
+import main.java.me.creepsterlgc.nexus.files.FileConfig;
+import main.java.me.creepsterlgc.nexus.files.FileMessages;
+import main.java.me.creepsterlgc.nexus.files.FileMotd;
+import main.java.me.creepsterlgc.nexus.files.FileRules;
+import main.java.me.creepsterlgc.nexus.utils.ServerUtils;
+
+import org.spongepowered.api.Game;
+import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.game.state.GameStartingServerEvent;
+import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
+import org.spongepowered.api.plugin.Plugin;
+
+import com.google.inject.Inject;
+
+@Plugin(id = "nexus", name = "Nexus", version = "2.9.0d")
+
+public class Nexus {
+
+	@Inject
+	private Game game;
+
+	@Inject
+	Logger logger;
+
+	public static Nexus nexus;
+
+	public static Nexus getInstance() { return nexus; }
+	public Game getGame() { return game; }
+
+    @Listener
+    public void onEnable(GameStartingServerEvent event) {
+
+    	File folder = new File("config/nexus");
+    	if(!folder.exists()) folder.mkdir();
+
+    	Controller.game = game;
+    	ServerUtils.sink = game.getServer().getBroadcastChannel();
+
+    	FileConfig.setup();
+    	FileChat.setup();
+    	FileCommands.setup();
+    	FileMessages.setup();
+    	FileMotd.setup();
+    	FileRules.setup();
+
+    	NexusDatabase.setup(game);
+    	NexusDatabase.load(game);
+
+        if (!game.getServiceManager().provide(NexusAPI.class).isPresent()) {
+            try {
+                game.getServiceManager().setProvider(this, NexusAPI.class, new NexusAPI());
+            } catch (Exception e) {
+                logger.warning("Error while registering NexusAPI!");
+            }
+        }
+
+    	game.getEventManager().registerListeners(this, new EventPlayerLogin());
+    	game.getEventManager().registerListeners(this, new EventPlayerChat());
+    	game.getEventManager().registerListeners(this, new EventPlayerDamage());
+    	game.getEventManager().registerListeners(this, new EventPlayerDeath());
+    	game.getEventManager().registerListeners(this, new EventPlayerInteractBlock());
+    	game.getEventManager().registerListeners(this, new EventPlayerInteractEntity());
+    	game.getEventManager().registerListeners(this, new EventPlayerJoin());
+    	game.getEventManager().registerListeners(this, new EventPlayerKick());
+    	game.getEventManager().registerListeners(this, new EventPlayerMove());
+    	game.getEventManager().registerListeners(this, new EventPlayerRespawn());
+    	game.getEventManager().registerListeners(this, new EventPlayerQuit());
+    	game.getEventManager().registerListeners(this, new EventSignChange());
+
+    	if(FileCommands.AFK()) game.getCommandManager().register(this, new CommandAFK(), "afk");
+    	if(FileCommands.BAN()) game.getCommandManager().register(this, new CommandBan(), "ban");
+    	if(FileCommands.BANLIST()) game.getCommandManager().register(this, new CommandBanlist(), "banlist");
+    	if(FileCommands.BROADCAST()) game.getCommandManager().register(this, new CommandBroadcast(), "broadcast");
+    	if(FileCommands.BUTCHER()) game.getCommandManager().register(this, new CommandButcher(), "butcher");
+    	if(FileCommands.CHANNEL()) game.getCommandManager().register(this, new CommandChannel(), "channel", "ch", "c");
+    	if(FileCommands.ENCHANT()) game.getCommandManager().register(this, new CommandEnchant(game), "enchant");
+    	if(FileCommands.FAKEJOIN()) game.getCommandManager().register(this, new CommandFakejoin(), "fakejoin");
+    	if(FileCommands.FAKELEAVE()) game.getCommandManager().register(this, new CommandFakeleave(), "fakeleave");
+    	if(FileCommands.FEED()) game.getCommandManager().register(this, new CommandFeed(), "feed");
+    	if(FileCommands.FLY()) game.getCommandManager().register(this, new CommandFly(), "fly");
+    	if(FileCommands.FORCE()) game.getCommandManager().register(this, new CommandForce(game), "force", "sudo");
+    	if(FileCommands.GAMEMODE()) game.getCommandManager().register(this, new CommandGamemode(), "gamemode", "gm");
+    	if(FileCommands.GIVE()) game.getCommandManager().register(this, new CommandGive(), "give", "g");
+    	if(FileCommands.HEAL()) game.getCommandManager().register(this, new CommandHeal(game), "heal");
+    	if(FileCommands.HOME()) game.getCommandManager().register(this, new CommandHome(), "home");
+    	if(FileCommands.ITEM()) game.getCommandManager().register(this, new CommandItem(), "item", "i");
+    	if(FileCommands.JUMP()) game.getCommandManager().register(this, new CommandJump(), "jump", "j");
+    	if(FileCommands.KICK()) game.getCommandManager().register(this, new CommandKick(game), "kick");
+    	if(FileCommands.KILL()) game.getCommandManager().register(this, new CommandKill(game), "kill");
+    	if(FileCommands.LIST()) game.getCommandManager().register(this, new CommandList(game), "list", "who");
+    	if(FileCommands.MAIL()) game.getCommandManager().register(this, new CommandMail(), "mail");
+    	if(FileCommands.MEMORY()) game.getCommandManager().register(this, new CommandMemory(), "memory");
+    	if(FileCommands.MSG()) game.getCommandManager().register(this, new CommandMessage(), "m", "msg", "message", "w", "whisper", "tell");
+    	if(FileCommands.MOTD()) game.getCommandManager().register(this, new CommandMotd(), "motd");
+    	if(FileCommands.MUTE()) game.getCommandManager().register(this, new CommandMute(game), "mute");
+    	if(FileCommands.NEXUS()) game.getCommandManager().register(this, new CommandNexus(), "nexus");
+    	if(FileCommands.NICK()) game.getCommandManager().register(this, new CommandNick(), "nick");
+    	if(FileCommands.ONLINETIME()) game.getCommandManager().register(this, new CommandOnlinetime(game), "onlinetime");
+    	if(FileCommands.PING()) game.getCommandManager().register(this, new CommandPing(), "ping");
+    	if(FileCommands.POWERTOOL()) game.getCommandManager().register(this, new CommandPowertool(game), "powertool");
+    	if(FileCommands.REALNAME()) game.getCommandManager().register(this, new CommandRealname(), "realname");
+    	if(FileCommands.REPLY()) game.getCommandManager().register(this, new CommandReply(), "r", "reply");
+    	if(FileCommands.RULES()) game.getCommandManager().register(this, new CommandRules(), "rules");
+    	if(FileCommands.SEARCHITEM()) game.getCommandManager().register(this, new CommandSearchitem(), "searchitem", "si", "search");
+    	if(FileCommands.SEEN()) game.getCommandManager().register(this, new CommandSeen(game), "seen");
+    	if(FileCommands.SPAWN()) game.getCommandManager().register(this, new CommandSpawn(), "spawn");
+    	if(FileCommands.SPEED()) game.getCommandManager().register(this, new CommandSpeed(), "speed");
+    	if(FileCommands.TEMPBAN()) game.getCommandManager().register(this, new CommandTempban(game), "tempban");
+    	if(FileCommands.TICKET()) game.getCommandManager().register(this, new CommandTicket(), "ticket");
+    	if(FileCommands.TIME()) game.getCommandManager().register(this, new CommandTime(game), "time");
+    	if(FileCommands.TP()) game.getCommandManager().register(this, new CommandTP(game), "tp", "teleport");
+    	if(FileCommands.TPA()) game.getCommandManager().register(this, new CommandTPA(game), "tpa");
+    	if(FileCommands.TPACCEPT()) game.getCommandManager().register(this, new CommandTPAccept(game), "tpaccept");
+    	if(FileCommands.TPAHERE()) game.getCommandManager().register(this, new CommandTPAHere(game), "tpahere");
+    	if(FileCommands.TPDEATH()) game.getCommandManager().register(this, new CommandTPDeath(game), "tpdeath", "back");
+    	if(FileCommands.TPDENY()) game.getCommandManager().register(this, new CommandTPDeny(game), "tpdeny");
+    	if(FileCommands.TPHERE()) game.getCommandManager().register(this, new CommandTPHere(game), "tphere");
+    	if(FileCommands.TPPOS()) game.getCommandManager().register(this, new CommandTPPos(game), "tppos");
+    	if(FileCommands.TPSWAP()) game.getCommandManager().register(this, new CommandTPSwap(game), "tpswap");
+    	if(FileCommands.TPWORLD()) game.getCommandManager().register(this, new CommandTPWorld(game), "tpworld");
+    	if(FileCommands.UNBAN()) game.getCommandManager().register(this, new CommandUnban(game), "unban");
+    	if(FileCommands.UNMUTE()) game.getCommandManager().register(this, new CommandUnmute(game), "unmute");
+    	if(FileCommands.WARP()) game.getCommandManager().register(this, new CommandWarp(), "warp");
+    	if(FileCommands.WEATHER()) game.getCommandManager().register(this, new CommandWeather(game), "weather");
+    	if(FileCommands.WHOIS()) game.getCommandManager().register(this, new CommandWhois(), "whois", "check");
+
+    	game.getCommandManager().register(this, new CommandPage(), "page");
+
+    	game.getScheduler().createTaskBuilder().interval(200, TimeUnit.MILLISECONDS).execute(new Runnable() {
+    		@Override
+			public void run() {
+    			NexusDatabase.commit();
+    		}
+    	}).submit(this);
+
+    	game.getScheduler().createTaskBuilder().interval(200, TimeUnit.MILLISECONDS).execute(new Runnable() {
+    		@Override
+			public void run() {
+    			for(Entry<String, NexusPortal> e : NexusDatabase.getPortals().entrySet()) e.getValue().transport();
+    		}
+    	}).submit(this);
+
+    	game.getScheduler().createTaskBuilder().interval(1, TimeUnit.SECONDS).execute(new Runnable() {
+    		@Override
+			public void run() {
+    			ServerUtils.heartbeat();
+    		}
+    	}).submit(this);
+
+    }
+
+    @Listener
+    public void onDisable(GameStoppingServerEvent event) {
+    	NexusDatabase.commit();
+    }
+
+}
