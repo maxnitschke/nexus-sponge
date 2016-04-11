@@ -37,12 +37,12 @@ public class CommandFly implements CommandCallable {
 
 			if(p.get(Keys.CAN_FLY).get() == false) {
 				p.offer(Keys.CAN_FLY, true);
-				sender.sendMessage(Text.of(TextColors.GRAY, "Flymode: ", TextColors.YELLOW, "on"));
+				sender.sendMessage(Text.of(TextColors.GRAY, "Flymode: ", TextColors.GOLD, "enabled"));
 			}
 			else {
 				p.offer(Keys.CAN_FLY, false);
 				p.offer(Keys.IS_FLYING, false);
-				sender.sendMessage(Text.of(TextColors.GRAY, "Flymode: ", TextColors.YELLOW, "off"));
+				sender.sendMessage(Text.of(TextColors.GRAY, "Flymode: ", TextColors.GOLD, "disabled"));
 			}
 
 		}
@@ -62,14 +62,14 @@ public class CommandFly implements CommandCallable {
 
 			if(p.get(Keys.CAN_FLY).get() == false) {
 				p.offer(Keys.CAN_FLY, true);
-				p.sendMessage(Text.of(TextColors.GRAY, "Flymode has been ", TextColors.YELLOW, "activated", TextColors.GRAY, " by ", TextColors.YELLOW, sender.getName()));
-				sender.sendMessage(Text.of(TextColors.GRAY, "Flymode has been ", TextColors.YELLOW, "activated", TextColors.GRAY, " for ", TextColors.YELLOW, p.getName()));
+				p.sendMessage(Text.of(TextColors.GRAY, "Flymode has been ", TextColors.GOLD, "activated", TextColors.GRAY, " by ", TextColors.YELLOW, sender.getName()));
+				sender.sendMessage(Text.of(TextColors.GRAY, "Flymode has been ", TextColors.GOLD, "activated", TextColors.GRAY, " for ", TextColors.YELLOW, p.getName()));
 			}
 			else {
 				p.offer(Keys.CAN_FLY, false);
 				p.offer(Keys.IS_FLYING, false);
-				p.sendMessage(Text.of(TextColors.GRAY, "Flymode has been ", TextColors.YELLOW, "deactivated", TextColors.GRAY, " by ", TextColors.YELLOW, sender.getName()));
-				sender.sendMessage(Text.of(TextColors.GRAY, "Flymode has been ", TextColors.YELLOW, "deactivated", TextColors.GRAY, " for ", TextColors.YELLOW, p.getName()));
+				p.sendMessage(Text.of(TextColors.GRAY, "Flymode has been ", TextColors.GOLD, "deactivated", TextColors.GRAY, " by ", TextColors.YELLOW, sender.getName()));
+				sender.sendMessage(Text.of(TextColors.GRAY, "Flymode has been ", TextColors.GOLD, "deactivated", TextColors.GRAY, " for ", TextColors.YELLOW, p.getName()));
 			}
 
 		}

@@ -7,6 +7,7 @@ import org.spongepowered.api.event.network.ClientConnectionEvent;
 import main.java.me.cuebyte.nexus.customized.NexusDatabase;
 import main.java.me.cuebyte.nexus.customized.NexusPlayer;
 import main.java.me.cuebyte.nexus.files.FileMessages;
+import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
 import main.java.me.cuebyte.nexus.utils.SerializeUtils;
 import main.java.me.cuebyte.nexus.utils.TextUtils;
 
@@ -34,6 +35,13 @@ public class EventPlayerQuit {
     	p.setLastlocation(location);
     	p.setLastseen(System.currentTimeMillis());
     	p.update();
+    	
+    	if(p.getGod() != 0) {
+    		if(!PermissionsUtils.has(player, "nexus.god-exempt")) {
+    			p.setGod(0);
+    			p.update();
+    		}
+    	}
     	
     }
 	

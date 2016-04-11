@@ -62,7 +62,7 @@ public class FileConfig {
 	
 	public static int LIMITS_MAX_TEMPBAN_TIME_IN_SECONDS() { return config.getNode("limits", "MAX_TEMPBAN_TIME_IN_SECONDS").getInt(); }
 	public static int LIMITS_MAX_MUTE_TIME_IN_SECONDS() { return config.getNode("limits", "MAX_MUTE_TIME_IN_SECONDS").getInt(); }
-
+	
 	public static boolean AFK_ENABLE_SYSTEM() { return config.getNode("afk", "ENABLE_SYSTEM").getBoolean(); }
 	public static double AFK_TIMER_IN_SECONDS() { return config.getNode("afk", "TIMER_IN_SECONDS").getDouble(); }
 	public static boolean AFK_KICK_ENABLE() { return config.getNode("afk", "KICK_ENABLE").getBoolean(); }

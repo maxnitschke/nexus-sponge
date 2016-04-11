@@ -149,6 +149,18 @@ public class FileCommands {
 				
 			}
 			
+			if(commands.getNode("version").getInt() <= 15) {
+				
+				commands.getNode("enabled", "god").setValue(true);
+				
+				commands.getNode("version").setValue(16);
+				
+				manager.save(commands);
+				
+				commands = manager.load();
+				
+			}
+			
 		} catch (IOException e) { e.printStackTrace(); }
 		
 	}
@@ -168,6 +180,7 @@ public class FileCommands {
 	public static boolean FORCE() { return commands.getNode("enabled", "force").getBoolean(); }
 	public static boolean GAMEMODE() { return commands.getNode("enabled", "gamemode").getBoolean(); }
 	public static boolean GIVE() { return commands.getNode("enabled", "give").getBoolean(); }
+	public static boolean GOD() { return commands.getNode("enabled", "god").getBoolean(); }
 	public static boolean HAT() { return commands.getNode("enabled", "hat").getBoolean(); }
 	public static boolean HEAL() { return commands.getNode("enabled", "heal").getBoolean(); }
 	public static boolean HOME() { return commands.getNode("enabled", "home").getBoolean(); }

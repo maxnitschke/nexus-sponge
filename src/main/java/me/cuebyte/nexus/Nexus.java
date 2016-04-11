@@ -20,6 +20,7 @@ import main.java.me.cuebyte.nexus.commands.CommandFly;
 import main.java.me.cuebyte.nexus.commands.CommandForce;
 import main.java.me.cuebyte.nexus.commands.CommandGamemode;
 import main.java.me.cuebyte.nexus.commands.CommandGive;
+import main.java.me.cuebyte.nexus.commands.CommandGod;
 import main.java.me.cuebyte.nexus.commands.CommandHeal;
 import main.java.me.cuebyte.nexus.commands.CommandHome;
 import main.java.me.cuebyte.nexus.commands.CommandItem;
@@ -93,7 +94,7 @@ import org.spongepowered.api.plugin.Plugin;
 
 import com.google.inject.Inject;
 
-@Plugin(id = "nexus", name = "Nexus", version = "1.7.5d")
+@Plugin(id = "nexus", name = "Nexus", version = "1.7.5c")
 
 public class Nexus {
 
@@ -162,6 +163,7 @@ public class Nexus {
     	if(FileCommands.FORCE()) game.getCommandManager().register(this, new CommandForce(game), "force", "sudo");
     	if(FileCommands.GAMEMODE()) game.getCommandManager().register(this, new CommandGamemode(), "gamemode", "gm");
     	if(FileCommands.GIVE()) game.getCommandManager().register(this, new CommandGive(), "give", "g");
+    	if(FileCommands.GOD()) game.getCommandManager().register(this, new CommandGod(), "god");
     	if(FileCommands.HEAL()) game.getCommandManager().register(this, new CommandHeal(game), "heal");
     	if(FileCommands.HOME()) game.getCommandManager().register(this, new CommandHome(), "home");
     	if(FileCommands.ITEM()) game.getCommandManager().register(this, new CommandItem(), "item", "i");
