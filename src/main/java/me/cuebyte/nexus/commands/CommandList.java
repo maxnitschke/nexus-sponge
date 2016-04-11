@@ -105,9 +105,9 @@ public class CommandList implements CommandCallable {
 
 	}
 
-	private final Text usage = Text.builder("Usage: /afk").color(TextColors.GOLD).build();
-	private final Text help = Text.builder("Help: /afk").color(TextColors.GOLD).build();
-	private final Text description = Text.builder("Nexus | AFK Command").color(TextColors.GOLD).build();
+	private final Text usage = Text.builder("Usage: /list").color(TextColors.GOLD).build();
+	private final Text help = Text.builder("Help: /list").color(TextColors.GOLD).build();
+	private final Text description = Text.builder("Nexus | List Command").color(TextColors.GOLD).build();
 	private List<String> suggestions = new ArrayList<String>();
 	private String permission = "";
 
