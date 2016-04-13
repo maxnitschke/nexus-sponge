@@ -14,7 +14,7 @@ public class CommandNexusVersion {
 
 		if(!PermissionsUtils.has(sender, "nexus.nexus.version")) { sender.sendMessage(Text.builder("You do not have permissions!").color(TextColors.RED).build()); return; }
 
-		sender.sendMessage(Text.of(TextColors.WHITE, "Using Nexus ", TextColors.YELLOW, "1.7.5d"));
+		sender.sendMessage(Text.of(TextColors.WHITE, "Using Nexus ", TextColors.YELLOW, "1.7.6a"));
 
 	}
 

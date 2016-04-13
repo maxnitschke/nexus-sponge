@@ -94,7 +94,7 @@ import org.spongepowered.api.plugin.Plugin;
 
 import com.google.inject.Inject;
 
-@Plugin(id = "nexus", name = "Nexus", version = "1.7.5c")
+@Plugin(id = "nexus", name = "Nexus", version = "1.7.6a")
 
 public class Nexus {
 

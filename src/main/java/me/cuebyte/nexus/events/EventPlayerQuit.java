@@ -37,7 +37,7 @@ public class EventPlayerQuit {
     	p.update();
     	
     	if(p.getGod() != 0) {
-    		if(!PermissionsUtils.has(player, "nexus.god-exempt")) {
+    		if(!PermissionsUtils.has(player, "nexus.god-override")) {
     			p.setGod(0);
     			p.update();
     		}
