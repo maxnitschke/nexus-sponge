@@ -71,7 +71,7 @@ public class CommandGod implements CommandCallable {
 			p.update();
 				
 			sender.sendMessage(Text.of(TextColors.GRAY, "Godmode ", TextColors.GOLD, "enabled", TextColors.GRAY, " for ", TextColors.GOLD, player.getName()));
-			sender.sendMessage(Text.of(TextColors.GRAY, "Godmode ", TextColors.GOLD, "enabled", TextColors.GRAY, " by ", TextColors.GOLD, sender.getName()));
+			player.sendMessage(Text.of(TextColors.GRAY, "Godmode ", TextColors.GOLD, "enabled", TextColors.GRAY, " by ", TextColors.GOLD, sender.getName()));
 			return CommandResult.success();
 		}
 			
@@ -79,7 +79,7 @@ public class CommandGod implements CommandCallable {
 		p.update();
 			
 		sender.sendMessage(Text.of(TextColors.GRAY, "Godmode ", TextColors.GOLD, "disabled", TextColors.GRAY, " for ", TextColors.GOLD, player.getName()));
-		sender.sendMessage(Text.of(TextColors.GRAY, "Godmode ", TextColors.GOLD, "disabled", TextColors.GRAY, " by ", TextColors.GOLD, sender.getName()));
+		player.sendMessage(Text.of(TextColors.GRAY, "Godmode ", TextColors.GOLD, "disabled", TextColors.GRAY, " by ", TextColors.GOLD, sender.getName()));
 		return CommandResult.success();
 
 	}
