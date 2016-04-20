@@ -161,6 +161,18 @@ public class FileCommands {
 				
 			}
 			
+			if(commands.getNode("version").getInt() <= 16) {
+				
+				commands.getNode("enabled", "vanish").setValue(true);
+				
+				commands.getNode("version").setValue(17);
+				
+				manager.save(commands);
+				
+				commands = manager.load();
+				
+			}
+			
 		} catch (IOException e) { e.printStackTrace(); }
 		
 	}
@@ -224,6 +236,7 @@ public class FileCommands {
 	public static boolean TPWORLD() { return commands.getNode("enabled", "tpworld").getBoolean(); }
 	public static boolean UNBAN() { return commands.getNode("enabled", "unban").getBoolean(); }
 	public static boolean UNMUTE() { return commands.getNode("enabled", "unmute").getBoolean(); }
+	public static boolean VANISH() { return commands.getNode("enabled", "vanish").getBoolean(); }
 	public static boolean WARP() { return commands.getNode("enabled", "warp").getBoolean(); }
 	public static boolean WEATHER() { return commands.getNode("enabled", "weather").getBoolean(); }
 	public static boolean WHOIS() { return commands.getNode("enabled", "whois").getBoolean(); }

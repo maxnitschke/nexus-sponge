@@ -61,6 +61,7 @@ import main.java.me.cuebyte.nexus.commands.CommandTicket;
 import main.java.me.cuebyte.nexus.commands.CommandTime;
 import main.java.me.cuebyte.nexus.commands.CommandUnban;
 import main.java.me.cuebyte.nexus.commands.CommandUnmute;
+import main.java.me.cuebyte.nexus.commands.CommandVanish;
 import main.java.me.cuebyte.nexus.commands.CommandWarp;
 import main.java.me.cuebyte.nexus.commands.CommandWeather;
 import main.java.me.cuebyte.nexus.commands.CommandWhois;
@@ -203,6 +204,7 @@ public class Nexus {
     	if(FileCommands.TPWORLD()) game.getCommandManager().register(this, new CommandTPWorld(game), "tpworld");
     	if(FileCommands.UNBAN()) game.getCommandManager().register(this, new CommandUnban(game), "unban");
     	if(FileCommands.UNMUTE()) game.getCommandManager().register(this, new CommandUnmute(game), "unmute");
+    	if(FileCommands.VANISH()) game.getCommandManager().register(this, new CommandVanish(), "vanish", "v");
     	if(FileCommands.WARP()) game.getCommandManager().register(this, new CommandWarp(), "warp");
     	if(FileCommands.WEATHER()) game.getCommandManager().register(this, new CommandWeather(game), "weather");
     	if(FileCommands.WHOIS()) game.getCommandManager().register(this, new CommandWhois(), "whois", "check");

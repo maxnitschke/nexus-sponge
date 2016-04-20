@@ -36,11 +36,9 @@ public class EventPlayerQuit {
     	p.setLastseen(System.currentTimeMillis());
     	p.update();
     	
-    	if(p.getGod() != 0) {
-    		if(!PermissionsUtils.has(player, "nexus.god-rejoin")) {
-    			p.setGod(0);
-    			p.update();
-    		}
+    	if(p.getGod() != 0 && !PermissionsUtils.has(player, "nexus.god-rejoin")) {
+    		p.setGod(0);
+    		p.update();
     	}
     	
     }

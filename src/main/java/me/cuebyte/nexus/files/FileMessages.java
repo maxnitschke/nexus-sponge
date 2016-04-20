@@ -40,6 +40,20 @@ public class FileMessages {
 			}
 			
 			messages = manager.load();
+
+			if(messages.getNode("version").getInt() <= 1) {
+				
+				messages.getNode("commands", "broadcast").setValue("&6Server&8: &e%message");
+				
+				messages.getNode("version").setValue(2);
+				
+				manager.save(messages);
+				
+				messages = manager.load();
+				
+			}
+			
+			messages = manager.load();
 			
 		} catch (IOException e) { e.printStackTrace(); }
 		
@@ -55,5 +69,7 @@ public class FileMessages {
 	public static String EVENTS_FIRSTJOIN_MESSAGE() { return messages.getNode("events", "firstjoin", "message").getString(); }
 	public static boolean EVENTS_FIRSTJOIN_UNIQUEPLAYERS_SHOW() { return messages.getNode("events", "firstjoin", "uniqueplayers", "show").getBoolean(); }
 	public static String EVENTS_FIRSTJOIN_UNIQUEPLAYERS_MESSAGE() { return messages.getNode("events", "firstjoin", "uniqueplayers", "message").getString(); }
+	
+	public static String COMMANDS_BROADCAST() { return messages.getNode("commands", "broadcast").getString(); }
 	
 }

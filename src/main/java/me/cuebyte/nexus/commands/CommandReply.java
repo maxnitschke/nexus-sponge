@@ -10,6 +10,7 @@ import main.java.me.cuebyte.nexus.customized.NexusMute;
 import main.java.me.cuebyte.nexus.customized.NexusPlayer;
 import main.java.me.cuebyte.nexus.utils.CommandUtils;
 import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
+import main.java.me.cuebyte.nexus.utils.TextUtils;
 
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
@@ -34,7 +35,7 @@ public class CommandReply implements CommandCallable {
 
 		if(args.length < 1) { sender.sendMessage(Text.builder("Usage: /r <message>").color(TextColors.GOLD).build()); return CommandResult.success(); }
 
-		String message = CommandUtils.combineArgs(0, args);
+		Text message = Text.of(CommandUtils.combineArgs(0, args));
 
 		if(sender instanceof Player) {
 
@@ -54,6 +55,8 @@ public class CommandReply implements CommandCallable {
 	    		}
 	    	}
 		}
+		
+		if(PermissionsUtils.has(sender, "nexus.msg-color")) message = TextUtils.color(message.toPlain());
 
 		Player player = (Player) sender;
 		NexusPlayer p = NexusDatabase.getPlayer(player.getUniqueId().toString());

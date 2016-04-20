@@ -3,9 +3,11 @@ package main.java.me.cuebyte.nexus.commands;
 import java.util.List;
 import java.util.Optional;
 
-import main.java.me.cuebyte.nexus.Controller;
+import main.java.me.cuebyte.nexus.files.FileMessages;
 import main.java.me.cuebyte.nexus.utils.CommandUtils;
 import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
+import main.java.me.cuebyte.nexus.utils.ServerUtils;
+import main.java.me.cuebyte.nexus.utils.TextUtils;
 
 import org.spongepowered.api.text.Text;
 
@@ -30,8 +32,8 @@ public class CommandBroadcast implements CommandCallable {
 
 		String message = CommandUtils.combineArgs(0, args);
 
-		Controller.broadcast(Text.of(TextColors.YELLOW, "Server", TextColors.GRAY, ": ", TextColors.WHITE, message));
-
+		ServerUtils.broadcast(TextUtils.color(FileMessages.COMMANDS_BROADCAST().replaceAll("%message", message)));
+		
 		return CommandResult.success();
 
 	}

@@ -87,7 +87,7 @@ public class EventPlayerJoin {
 		else {
 			
 		}
-		
+    	
 		if(FileMotd.SHOW_ON_JOIN()) {
 			for(String s : FileMotd.MESSAGE()) {
 				s = s.replaceAll("%player", player.getName());

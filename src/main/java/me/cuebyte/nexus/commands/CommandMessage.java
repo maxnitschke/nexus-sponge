@@ -10,6 +10,7 @@ import main.java.me.cuebyte.nexus.customized.NexusPlayer;
 import main.java.me.cuebyte.nexus.utils.CommandUtils;
 import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
 import main.java.me.cuebyte.nexus.utils.ServerUtils;
+import main.java.me.cuebyte.nexus.utils.TextUtils;
 
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
@@ -32,7 +33,7 @@ public class CommandMessage implements CommandCallable {
 
 		if(args.length < 2) { sender.sendMessage(Text.builder("Usage: /msg <player> <message>").color(TextColors.GOLD).build()); return CommandResult.success(); }
 
-		String message = CommandUtils.combineArgs(1, args);
+		Text message = Text.of(CommandUtils.combineArgs(1, args));
 
 		if(sender instanceof Player) {
 
@@ -53,6 +54,8 @@ public class CommandMessage implements CommandCallable {
 	    	}
 		}
 
+		if(PermissionsUtils.has(sender, "nexus.msg-color")) message = TextUtils.color(message.toPlain());
+		
 		Player player = ServerUtils.getPlayer(args[0]);
 
 		if(player == null) {
@@ -62,7 +65,7 @@ public class CommandMessage implements CommandCallable {
 
 		NexusPlayer p = NexusDatabase.getPlayer(player.getUniqueId().toString());
 		if(sender instanceof Player) p.setReply(sender.getName().toLowerCase());
-
+		
 		sender.sendMessage(Text.of(TextColors.GOLD, "To ", player.getName(), ": ", TextColors.WHITE, message));
 		player.sendMessage(Text.of(TextColors.GOLD, "From ", sender.getName(), ": ", TextColors.WHITE, message));
 

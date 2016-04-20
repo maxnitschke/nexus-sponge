@@ -10,6 +10,8 @@ import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
 import main.java.me.cuebyte.nexus.utils.ServerUtils;
 import main.java.me.cuebyte.nexus.utils.TextUtils;
 
+import org.spongepowered.api.data.DataQuery;
+import org.spongepowered.api.data.MemoryDataContainer;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.inventory.ItemStack;
@@ -31,7 +33,7 @@ public class CommandGive implements CommandCallable {
 
 		if(!PermissionsUtils.has(sender, "nexus.give")) { sender.sendMessage(TextUtils.permissions()); return CommandResult.success(); }
 
-		if(args.length < 2 || args.length > 3) { sender.sendMessage(TextUtils.usage("/give <player> <item> [amount]")); return CommandResult.success(); }
+		if(args.length < 2 || args.length > 4) { sender.sendMessage(TextUtils.usage("/give <player> <item> [amount] [data]")); return CommandResult.success(); }
 
 		Player player = ServerUtils.getPlayer(args[0].toLowerCase());
 		if(player == null) {
@@ -45,18 +47,28 @@ public class CommandGive implements CommandCallable {
 			return CommandResult.success();
 		}
 
-		int amount = 0;
+		int amount = 1;
 
-		if(args.length == 3) {
+		if(args.length >= 3) {
 			if(!CommandUtils.isInt(args[2])) {
 				sender.sendMessage(TextUtils.error("<amount> has to be a number!"));
 				return CommandResult.success();
 			}
 			amount = CommandUtils.getInt(args[2]);
 		}
+		
+		int data = 0;
 
-		ItemStack item = ItemUtils.build(type, amount);
-
+		if(args.length == 4) {
+			if(!CommandUtils.isInt(args[3])) {
+				sender.sendMessage(TextUtils.error("<data> has to be a number!"));
+				return CommandResult.success();
+			}
+			data = CommandUtils.getInt(args[3]);
+		}
+		
+		MemoryDataContainer container = (MemoryDataContainer) new MemoryDataContainer().set(DataQuery.of("ItemType"), type).set(DataQuery.of("Count"), amount).set(DataQuery.of("UnsafeDamage"), data);
+		ItemStack item = ItemStack.builder().fromContainer(container).build();
 		ItemUtils.drop(item, player);
 
 		player.sendMessage(Text.of(TextColors.GOLD, sender.getName(), TextColors.GRAY, " has given you ", TextColors.GOLD, amount, " ", args[1].toLowerCase(), "(s)"));
@@ -66,9 +78,9 @@ public class CommandGive implements CommandCallable {
 
 	}
 
-	private final Text usage = Text.builder("Usage: /i <item> [amount]").color(TextColors.GOLD).build();
-	private final Text help = Text.builder("Help: /i <item> [amount]").color(TextColors.GOLD).build();
-	private final Text description = Text.builder("Nexus | Item Command").color(TextColors.GOLD).build();
+	private final Text usage = Text.builder("Usage: /i <item> [amount] [data]").color(TextColors.GOLD).build();
+	private final Text help = Text.builder("Help: /i <item> [amount] [data]").color(TextColors.GOLD).build();
+	private final Text description = Text.builder("Nexus | Give Command").color(TextColors.GOLD).build();
 	private List<String> suggestions = new ArrayList<String>();
 	private String permission = "";
 
