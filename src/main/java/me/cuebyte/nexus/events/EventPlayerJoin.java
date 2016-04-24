@@ -1,9 +1,15 @@
 package main.java.me.cuebyte.nexus.events;
 
+import java.util.Map.Entry;
+
+import main.java.me.cuebyte.nexus.customized.NexusChannel;
+import main.java.me.cuebyte.nexus.customized.NexusChannels;
 import main.java.me.cuebyte.nexus.customized.NexusDatabase;
 import main.java.me.cuebyte.nexus.customized.NexusPlayer;
+import main.java.me.cuebyte.nexus.files.FileChat;
 import main.java.me.cuebyte.nexus.files.FileMessages;
 import main.java.me.cuebyte.nexus.files.FileMotd;
+import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
 import main.java.me.cuebyte.nexus.utils.ServerUtils;
 import main.java.me.cuebyte.nexus.utils.TextUtils;
 
@@ -92,6 +98,17 @@ public class EventPlayerJoin {
 			for(String s : FileMotd.MESSAGE()) {
 				s = s.replaceAll("%player", player.getName());
 				player.sendMessage(TextUtils.color(s));
+			}
+		}
+		
+		if(FileChat.CHANNELS()) {
+			for(Entry<String, NexusChannel> e : NexusChannels.all().entrySet()) {
+				NexusChannel c = e.getValue();
+				if(PermissionsUtils.has(player, "nexus.channel.autojoin." + c.getName().toLowerCase())) {
+					pl.setChannel(c.getName().toLowerCase());
+					player.sendMessage(TextUtils.color("&7Automatically joined channel: " + c.getName()));
+					break;
+				}
 			}
 		}
 		

@@ -44,12 +44,12 @@ public class CommandSeen implements CommandCallable {
 			return CommandResult.success();
 		}
 
-		sender.sendMessage(Text.of(TextColors.GOLD, p.getName(), " has been first seen: ", TextColors.GRAY, TimeUtils.toString(System.currentTimeMillis() - p.getFirstseen()), " ago"));
+		sender.sendMessage(Text.of(TextColors.GOLD, p.getName(), " was first seen: ", TextColors.GRAY, TimeUtils.toString(System.currentTimeMillis() - p.getFirstseen()), " ago"));
 
 		boolean online = Controller.getServer().getPlayer(args[0].toLowerCase()).isPresent();
 
-		if(online) sender.sendMessage(Text.of(TextColors.GOLD, p.getName(), " has been last seen: ", TextColors.GREEN, "Currently online!"));
-		else sender.sendMessage(Text.of(TextColors.GOLD, p.getName(), " has been last seen: ", TextColors.GRAY, TimeUtils.toString(System.currentTimeMillis() - p.getLastseen()), " ago"));
+		if(online) sender.sendMessage(Text.of(TextColors.GOLD, p.getName(), " was last seen: ", TextColors.GREEN, "Currently online!"));
+		else sender.sendMessage(Text.of(TextColors.GOLD, p.getName(), " was last seen: ", TextColors.GRAY, TimeUtils.toString(System.currentTimeMillis() - p.getLastseen()), " ago"));
 
 		return CommandResult.success();
 

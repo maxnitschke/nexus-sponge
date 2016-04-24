@@ -32,35 +32,35 @@ public class FileChat {
 				chat.getNode("chat", "nickprefix").setValue("&7*");
 				
 				chat.getNode("channels", "local", "name").setValue("&eLocal");
-				chat.getNode("channels", "local", "trigger").setValue("l");
+				chat.getNode("channels", "local", "trigger").setValue(".");
 				chat.getNode("channels", "local", "prefix").setValue("&7[&eLocal&7] ");
 				chat.getNode("channels", "local", "suffix").setValue("");
 				chat.getNode("channels", "local", "format").setValue("%cprefix%prefix&7%player%suffix%csuffix&8: &f%message");
 				chat.getNode("channels", "local", "range").setValue("100");
 				
 				chat.getNode("channels", "world", "name").setValue("&eWorld");
-				chat.getNode("channels", "world", "trigger").setValue("w");
+				chat.getNode("channels", "world", "trigger").setValue("+");
 				chat.getNode("channels", "world", "prefix").setValue("");
 				chat.getNode("channels", "world", "suffix").setValue("");
 				chat.getNode("channels", "world", "format").setValue("&7[&e%world&7] %prefix&7%player%suffix&8: &7%message");
 				chat.getNode("channels", "world", "range").setValue("world");
 				
 				chat.getNode("channels", "global", "name").setValue("&6Global");
-				chat.getNode("channels", "global", "trigger").setValue("g");
+				chat.getNode("channels", "global", "trigger").setValue("!");
 				chat.getNode("channels", "global", "prefix").setValue("&7[&6G&7] ");
 				chat.getNode("channels", "global", "suffix").setValue("");
 				chat.getNode("channels", "global", "format").setValue("%cprefix%prefix&7%player%suffix%csuffix&8: &7%message");
 				chat.getNode("channels", "global", "range").setValue("global");
 				
 				chat.getNode("channels", "staff", "name").setValue("&3Staff");
-				chat.getNode("channels", "staff", "trigger").setValue("s");
+				chat.getNode("channels", "staff", "trigger").setValue("*");
 				chat.getNode("channels", "staff", "prefix").setValue("&7[&3Staff&7] ");
 				chat.getNode("channels", "staff", "suffix").setValue("");
 				chat.getNode("channels", "staff", "format").setValue("%cprefix%prefix&7%player%suffix%csuffix&8: &b%message");
 				chat.getNode("channels", "staff", "range").setValue("global");
 				
 				chat.getNode("channels", "help", "name").setValue("&2Help");
-				chat.getNode("channels", "help", "trigger").setValue("h");
+				chat.getNode("channels", "help", "trigger").setValue("?");
 				chat.getNode("channels", "help", "prefix").setValue("&7[&2Help&7] ");
 				chat.getNode("channels", "help", "suffix").setValue("");
 				chat.getNode("channels", "help", "format").setValue("%cprefix%prefix&7%player%suffix%csuffix&8: &a%message");

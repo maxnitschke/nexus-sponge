@@ -80,13 +80,18 @@ public class CommandChannelSpeak {
 	    		t.sendMessage(total);
 	    	}
 	    }
-	    else if(range.equalsIgnoreCase("world")) {
-	    	for(Player t : Controller.getPlayers()) {
-	    		if(!t.getWorld().getName().equalsIgnoreCase(player.getWorld().getName())) continue;
-	    		if(!t.hasPermission("nexus.channel.receive." + channel)) continue;
-	    		t.sendMessage(total);
+    	else if(range.equalsIgnoreCase("world")) {
+	    	boolean received = false;
+    		for(Player t : Controller.getPlayers()) {
+    			if(!t.getWorld().getName().equalsIgnoreCase(player.getWorld().getName())) continue;
+    			if(!t.hasPermission("nexus.channel.receive." + channel)) continue;
+    			t.sendMessage(total);
+	    		if(!t.getUniqueId().toString().equalsIgnoreCase(player.getUniqueId().toString())) received = true;
+    		}
+	    	if(!received) {
+	    		player.sendMessage(Text.of(TextColors.GRAY, "No one hears you."));
 	    	}
-	    }
+    	}
 	    else {
 	    	int radius;
 	    	try { radius = Integer.parseInt(c.getRange()); }
@@ -94,6 +99,7 @@ public class CommandChannelSpeak {
 	    		player.sendMessage(Text.of(TextColors.RED, "Invalid range in channels config!"));
 	    		return;
 	    	}
+	    	boolean received = false;
 	    	for(Player t : Controller.getPlayers()) {
 	    		if(!t.getWorld().getName().equalsIgnoreCase(player.getWorld().getName())) continue;
 	    			
@@ -108,6 +114,11 @@ public class CommandChannelSpeak {
 					
 	    		if(!t.hasPermission("nexus.channel.receive." + channel)) continue;
 	    		t.sendMessage(total);
+	    		if(!t.getUniqueId().toString().equalsIgnoreCase(player.getUniqueId().toString())) received = true;
+	    	}
+	    	
+	    	if(!received) {
+	    		player.sendMessage(Text.of(TextColors.GRAY, "No one hears you."));
 	    	}
 	    	
 	    }

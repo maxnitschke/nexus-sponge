@@ -1,5 +1,6 @@
 package main.java.me.cuebyte.nexus.events;
 
+import java.util.Map.Entry;
 import java.util.Optional;
 
 import main.java.me.cuebyte.nexus.Controller;
@@ -93,6 +94,15 @@ public class EventPlayerChat {
     		NexusChannel c = NexusChannels.get(channel);
     		if(c == null) c = NexusChannels.get(FileChat.DEFAULTCHANNEL());
     		
+    		for(Entry<String, NexusChannel> e : NexusChannels.all().entrySet()) {
+    			NexusChannel t = e.getValue();
+    			if(message.startsWith(t.getTrigger())) {
+    				c = t;
+    				message = message.substring(1);
+    				break;
+    			}
+    		}
+    		
     		if(!PermissionsUtils.has(player, "nexus.channel.speak." + c.getID())) {
     			player.sendMessage(Text.of(TextColors.RED, "You do not have permissions to speak in this channel!"));
     			event.setCancelled(true);
@@ -124,23 +134,28 @@ public class EventPlayerChat {
 	    		}
 	    	}
 	    	else if(range.equalsIgnoreCase("world")) {
+		    	boolean received = false;
 	    		for(Player t : Controller.getPlayers()) {
 	    			if(!t.getWorld().getName().equalsIgnoreCase(player.getWorld().getName())) continue;
 	    			if(!t.hasPermission("nexus.channel.receive." + channel)) continue;
 	    			t.sendMessage(total);
+		    		if(!t.getUniqueId().toString().equalsIgnoreCase(player.getUniqueId().toString())) received = true;
 	    		}
+		    	if(!received) {
+		    		player.sendMessage(Text.of(TextColors.GRAY, "No one hears you."));
+		    	}
 	    	}
-	    	else {
-	    		int radius;
-	    		try { radius = Integer.parseInt(c.getRange()); }
-	    		catch(NumberFormatException e) {
-	    			player.sendMessage(Text.of(TextColors.RED, "Invalid range in channels config!"));
-	    	    	event.setCancelled(true);
-	    			return;
-	    		}
-	    		for(Player t : Controller.getPlayers()) {
-	    			if(!t.getWorld().getName().equalsIgnoreCase(player.getWorld().getName())) continue;
-	    			
+		    else {
+		    	int radius;
+		    	try { radius = Integer.parseInt(c.getRange()); }
+		    	catch(NumberFormatException e) {
+		    		player.sendMessage(Text.of(TextColors.RED, "Invalid range in channels config!"));
+		    		return;
+		    	}
+		    	boolean received = false;
+		    	for(Player t : Controller.getPlayers()) {
+		    		if(!t.getWorld().getName().equalsIgnoreCase(player.getWorld().getName())) continue;
+		    			
 					Location<World> l = t.getLocation();
 					double x = player.getLocation().getX();
 					double z = player.getLocation().getZ();
@@ -149,11 +164,17 @@ public class EventPlayerChat {
 					if(l.getX() <= x + radius && l.getX() >= x - radius) hit_x = true;
 					if(l.getZ() <= z + radius && l.getZ() >= z - radius) hit_z = true;
 					if(!hit_x || !hit_z) continue;
-					
-	    			if(!t.hasPermission("nexus.channel.receive." + channel)) continue;
-	    			t.sendMessage(total);
-	    		}
-	    	}
+						
+		    		if(!t.hasPermission("nexus.channel.receive." + channel)) continue;
+		    		t.sendMessage(total);
+		    		if(!t.getUniqueId().toString().equalsIgnoreCase(player.getUniqueId().toString())) received = true;
+		    	}
+		    	
+		    	if(!received) {
+		    		player.sendMessage(Text.of(TextColors.GRAY, "No one hears you."));
+		    	}
+		    	
+		    }
 	    	
 	    	event.setCancelled(true);
 
