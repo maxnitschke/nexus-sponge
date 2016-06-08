@@ -10,7 +10,8 @@ import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.entity.Item;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.cause.Cause;
-import org.spongepowered.api.event.cause.NamedCause;
+import org.spongepowered.api.event.cause.entity.spawn.EntitySpawnCause;
+import org.spongepowered.api.event.cause.entity.spawn.SpawnTypes;
 import org.spongepowered.api.item.Enchantment;
 import org.spongepowered.api.item.Enchantments;
 import org.spongepowered.api.item.ItemType;
@@ -32,7 +33,7 @@ public class ItemUtils {
 		if (o.isPresent()) {
 		    Item i = (Item) o.get();
 		    i.offer(Keys.REPRESENTED_ITEM, item.createSnapshot());
-		    location.getExtent().spawnEntity(i, Cause.of(NamedCause.simulated(player)));
+		    location.getExtent().spawnEntity(i, Cause.source(EntitySpawnCause.builder().entity(i).type(SpawnTypes.PLUGIN).build()).build());
 		}
 		
 	}

@@ -58,11 +58,11 @@ public class CommandItem implements CommandCallable {
 		int data = 0;
 
 		if(args.length == 3) {
-			if(!CommandUtils.isInt(args[3])) {
+			if(!CommandUtils.isInt(args[2])) {
 				sender.sendMessage(TextUtils.error("<data> has to be a number!"));
 				return CommandResult.success();
 			}
-			data = CommandUtils.getInt(args[3]);
+			data = CommandUtils.getInt(args[2]);
 		}
 		
 		MemoryDataContainer container = (MemoryDataContainer) new MemoryDataContainer().set(DataQuery.of("ItemType"), type).set(DataQuery.of("Count"), amount).set(DataQuery.of("UnsafeDamage"), data);
