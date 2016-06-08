@@ -86,14 +86,6 @@ public class NexusDatabase {
 				execute("CREATE TABLE warps (name TEXT, world TEXT, x DOUBLE, y DOUBLE, z DOUBLE, yaw DOUBLE, pitch DOUBLE, owner TEXT, invited TEXT, private TEXT, message TEXT)");
 			}
 			
-			if(!tables.contains("zones")) {
-				execute("CREATE TABLE zones (name TEXT, world TEXT, x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2 DOUBLE, y2 DOUBLE, z2 DOUBLE, priority DOUBLE, owner TEXT, members TEXT, settings TEXT)");
-			}
-			
-			if(!tables.contains("portals")) {
-				execute("CREATE TABLE portals (name TEXT, zone TEXT, warp TEXT, message TEXT)");
-			}
-				
 		} catch (SQLException e) { e.printStackTrace(); }
 			
 		
@@ -203,34 +195,6 @@ public class NexusDatabase {
 			e.printStackTrace();
 		}
 		
-		try {
-			Connection c = datasource.getConnection();
-			Statement s = c.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM zones");
-			while(rs.next()) {
-				NexusZone zone = new NexusZone(rs.getString("name"), rs.getString("world"), rs.getDouble("x1"), rs.getDouble("y1"), rs.getDouble("z1"), rs.getDouble("x2"), rs.getDouble("y2"), rs.getDouble("z2"), rs.getDouble("priority"), rs.getString("owner"), DeserializeUtils.members(rs.getString("members")), DeserializeUtils.settings(rs.getString("settings")));
-				NexusDatabase.addZone(zone.getName(), zone);
-			}
-			s.close();
-			c.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			Connection c = datasource.getConnection();
-			Statement s = c.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM portals");
-			while(rs.next()) {
-				NexusPortal portal = new NexusPortal(rs.getString("name"), rs.getString("zone"), rs.getString("warp"), rs.getString("message"));
-				NexusDatabase.addPortal(portal.getName(), portal);
-			}
-			s.close();
-			c.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
 	}
 	
 	public static void execute(String execute) {	
@@ -312,17 +276,5 @@ public class NexusDatabase {
 	public static void removeWarp(String name) { if(warps.containsKey(name)) warps.remove(name); }
 	public static NexusWarp getWarp(String name) { return warps.containsKey(name) ? warps.get(name) : null; }
 	public static HashMap<String, NexusWarp> getWarps() { return warps; }
-	
-	private static HashMap<String, NexusZone> zones = new HashMap<String, NexusZone>();
-	public static void addZone(String name, NexusZone zone) { zones.put(name, zone); }
-	public static void removeZone(String name) { if(zones.containsKey(name)) zones.remove(name); }
-	public static NexusZone getZone(String name) { return zones.containsKey(name) ? zones.get(name) : null; }
-	public static HashMap<String, NexusZone> getZones() { return zones; }
-	
-	private static HashMap<String, NexusPortal> portals = new HashMap<String, NexusPortal>();
-	public static void addPortal(String name, NexusPortal portal) { portals.put(name, portal); }
-	public static void removePortal(String name) { if(portals.containsKey(name)) portals.remove(name); }
-	public static NexusPortal getPortal(String name) { return portals.containsKey(name) ? portals.get(name) : null; }
-	public static HashMap<String, NexusPortal> getPortals() { return portals; }
 	
 }

@@ -22,7 +22,6 @@ public class NexusPlayer {
 	private double firstseen;
 	private double lastseen;
 	
-	private NexusSelection selection;
 	private double lastaction;
 	private boolean afk;
 	private HashMap<String, NexusHome> homes;
@@ -51,7 +50,6 @@ public class NexusPlayer {
 		this.firstseen = firstseen;
 		this.lastseen = lastseen;
 		
-		selection = new NexusSelection();
 		lastaction = 0;
 		afk = false;
 		homes = new HashMap<String, NexusHome>();
@@ -98,7 +96,6 @@ public class NexusPlayer {
 	public void setFirstseen(double firstseen) { this.firstseen = firstseen; }
 	public void setLastseen(double lastseen) { this.lastseen = lastseen; }
 
-	public void setSelection(NexusSelection selection) { this.selection = selection; }
 	public void setLastaction(double lastaction) { this.lastaction = lastaction; }
 	public void setAFK(boolean afk) { this.afk = afk; }
 	public void setHome(String name, NexusHome home) { if(homes == null) homes = new HashMap<String, NexusHome>(); homes.put(name, home); }
@@ -126,7 +123,6 @@ public class NexusPlayer {
 	public double getFirstseen() { return firstseen; }
 	public double getLastseen() { return lastseen; }
 	
-	public NexusSelection getSelection() { return selection; }
 	public double getLastaction() { return lastaction; }
 	public boolean getAFK() { return afk; }
 	public NexusHome getHome(String name) { if(homes == null) homes = new HashMap<String, NexusHome>(); return homes.containsKey(name) ? homes.get(name) : null; }

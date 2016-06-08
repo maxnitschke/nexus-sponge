@@ -1,7 +1,6 @@
 package main.java.me.cuebyte.nexus;
 
 import java.io.File;
-import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -66,7 +65,6 @@ import main.java.me.cuebyte.nexus.commands.CommandWarp;
 import main.java.me.cuebyte.nexus.commands.CommandWeather;
 import main.java.me.cuebyte.nexus.commands.CommandWhois;
 import main.java.me.cuebyte.nexus.customized.NexusDatabase;
-import main.java.me.cuebyte.nexus.customized.NexusPortal;
 import main.java.me.cuebyte.nexus.events.EventPlayerChat;
 import main.java.me.cuebyte.nexus.events.EventPlayerDamage;
 import main.java.me.cuebyte.nexus.events.EventPlayerDeath;
@@ -85,6 +83,7 @@ import main.java.me.cuebyte.nexus.files.FileConfig;
 import main.java.me.cuebyte.nexus.files.FileMessages;
 import main.java.me.cuebyte.nexus.files.FileMotd;
 import main.java.me.cuebyte.nexus.files.FileRules;
+import main.java.me.cuebyte.nexus.utils.EconomyUtils;
 import main.java.me.cuebyte.nexus.utils.ServerUtils;
 
 import org.spongepowered.api.Game;
@@ -149,6 +148,7 @@ public class Nexus {
     	game.getEventManager().registerListeners(this, new EventPlayerRespawn());
     	game.getEventManager().registerListeners(this, new EventPlayerQuit());
     	game.getEventManager().registerListeners(this, new EventSignChange());
+    	game.getEventManager().registerListeners(this, new EconomyUtils());
 
     	if(FileCommands.AFK()) game.getCommandManager().register(this, new CommandAFK(), "afk");
     	if(FileCommands.BAN()) game.getCommandManager().register(this, new CommandBan(), "ban");
@@ -215,13 +215,6 @@ public class Nexus {
     		@Override
 			public void run() {
     			NexusDatabase.commit();
-    		}
-    	}).submit(this);
-
-    	game.getScheduler().createTaskBuilder().interval(200, TimeUnit.MILLISECONDS).execute(new Runnable() {
-    		@Override
-			public void run() {
-    			for(Entry<String, NexusPortal> e : NexusDatabase.getPortals().entrySet()) e.getValue().transport();
     		}
     	}).submit(this);
 
