@@ -65,6 +65,7 @@ public class FileCommands {
 				commands.getNode("enabled", "selection").setValue(true);
 				commands.getNode("enabled", "spawn").setValue(true);
 				commands.getNode("enabled", "speed").setValue(true);
+				commands.getNode("enabled", "spy").setValue(true);
 				commands.getNode("enabled", "tempban").setValue(true);
 				commands.getNode("enabled", "ticket").setValue(true);
 				commands.getNode("enabled", "time").setValue(true);
@@ -173,6 +174,18 @@ public class FileCommands {
 				
 			}
 			
+			if(commands.getNode("version").getInt() <= 17) {
+				
+				commands.getNode("enabled", "spy").setValue(true);
+				
+				commands.getNode("version").setValue(18);
+				
+				manager.save(commands);
+				
+				commands = manager.load();
+				
+			}
+			
 		} catch (IOException e) { e.printStackTrace(); }
 		
 	}
@@ -221,6 +234,7 @@ public class FileCommands {
 	public static boolean SELECTION() { return commands.getNode("enabled", "selection").getBoolean(); }
 	public static boolean SPAWN() { return commands.getNode("enabled", "spawn").getBoolean(); }
 	public static boolean SPEED() { return commands.getNode("enabled", "speed").getBoolean(); }
+	public static boolean SPY() { return commands.getNode("enabled", "spy").getBoolean(); }
 	public static boolean TEMPBAN() { return commands.getNode("enabled", "tempban").getBoolean(); }
 	public static boolean TICKET() { return commands.getNode("enabled", "ticket").getBoolean(); }
 	public static boolean TIME() { return commands.getNode("enabled", "time").getBoolean(); }

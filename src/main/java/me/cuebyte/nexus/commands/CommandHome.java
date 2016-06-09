@@ -30,18 +30,18 @@ public class CommandHome implements CommandCallable {
 		else if(args[0].equalsIgnoreCase("move")) { new CommandHomeMove(sender, args); return CommandResult.success(); }
 		else if(args[0].equalsIgnoreCase("help")) {
 			sender.sendMessage(Text.of(TextColors.YELLOW, "Home Help"));
-			sender.sendMessage(Text.of(TextColors.GOLD, "/home <name>"));
+			sender.sendMessage(Text.of(TextColors.GOLD, "/home [player] [name]"));
 			sender.sendMessage(Text.of(TextColors.GOLD, "/home set <name>"));
 			sender.sendMessage(Text.of(TextColors.GOLD, "/home delete <name>"));
 			sender.sendMessage(Text.of(TextColors.GOLD, "/home list [keyword]"));
 			sender.sendMessage(Text.of(TextColors.GOLD, "/home move [name]"));
 		}
-		else if(!arguments.equalsIgnoreCase("") && args.length == 1) {
+		else if(args.length < 3) {
 			new CommandHomeTeleport(sender, args); return CommandResult.success();
 		}
 		else {
 			sender.sendMessage(Text.of(TextColors.YELLOW, "Home Help"));
-			sender.sendMessage(Text.of(TextColors.GOLD, "/home <name>"));
+			sender.sendMessage(Text.of(TextColors.GOLD, "/home [player] [name]"));
 			sender.sendMessage(Text.of(TextColors.GOLD, "/home set <name>"));
 			sender.sendMessage(Text.of(TextColors.GOLD, "/home delete <name>"));
 			sender.sendMessage(Text.of(TextColors.GOLD, "/home list [keyword]"));

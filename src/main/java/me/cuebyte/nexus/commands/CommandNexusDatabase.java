@@ -31,8 +31,6 @@ public class CommandNexusDatabase {
 		sender.sendMessage(Text.of(TextColors.GRAY, "Homes: ", TextColors.GOLD, homes));
 		sender.sendMessage(Text.of(TextColors.GRAY, "Warps: ", TextColors.GOLD, NexusDatabase.getWarps().size()));
 		sender.sendMessage(Text.of(TextColors.GRAY, "Tickets: ", TextColors.GOLD, NexusDatabase.getTickets().size()));
-		sender.sendMessage(Text.of(TextColors.GRAY, "Zones: ", TextColors.GOLD, NexusDatabase.getZones().size()));
-		sender.sendMessage(Text.of(TextColors.GRAY, "Portals: ", TextColors.GOLD, NexusDatabase.getPortals().size()));
 
 	}
 

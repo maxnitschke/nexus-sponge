@@ -45,6 +45,7 @@ import main.java.me.cuebyte.nexus.commands.CommandSearchitem;
 import main.java.me.cuebyte.nexus.commands.CommandSeen;
 import main.java.me.cuebyte.nexus.commands.CommandSpawn;
 import main.java.me.cuebyte.nexus.commands.CommandSpeed;
+import main.java.me.cuebyte.nexus.commands.CommandSpy;
 import main.java.me.cuebyte.nexus.commands.CommandTP;
 import main.java.me.cuebyte.nexus.commands.CommandTPA;
 import main.java.me.cuebyte.nexus.commands.CommandTPAHere;
@@ -94,7 +95,7 @@ import org.spongepowered.api.plugin.Plugin;
 
 import com.google.inject.Inject;
 
-@Plugin(id = "nexus", name = "Nexus", version = "1.8.2c")
+@Plugin(id = "nexus", name = "Nexus", version = "1.8.3d")
 
 public class Nexus {
 
@@ -189,6 +190,7 @@ public class Nexus {
     	if(FileCommands.SEEN()) game.getCommandManager().register(this, new CommandSeen(game), "seen");
     	if(FileCommands.SPAWN()) game.getCommandManager().register(this, new CommandSpawn(), "spawn");
     	if(FileCommands.SPEED()) game.getCommandManager().register(this, new CommandSpeed(), "speed");
+    	if(FileCommands.SPY()) game.getCommandManager().register(this, new CommandSpy(), "spy");
     	if(FileCommands.TEMPBAN()) game.getCommandManager().register(this, new CommandTempban(game), "tempban");
     	if(FileCommands.TICKET()) game.getCommandManager().register(this, new CommandTicket(), "ticket");
     	if(FileCommands.TIME()) game.getCommandManager().register(this, new CommandTime(game), "time");

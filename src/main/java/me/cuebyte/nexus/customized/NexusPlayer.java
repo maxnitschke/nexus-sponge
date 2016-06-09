@@ -26,6 +26,7 @@ public class NexusPlayer {
 	private boolean afk;
 	private HashMap<String, NexusHome> homes;
 	private String reply;
+	private boolean spy;
 	private HashMap<String, Double> tpa;
 	private HashMap<String, Double> tpahere;
 	private HashMap<String, String> powertools;
@@ -54,6 +55,7 @@ public class NexusPlayer {
 		afk = false;
 		homes = new HashMap<String, NexusHome>();
 		reply = "";
+		spy = false;
 		tpa = new HashMap<String, Double>();
 		tpahere = new HashMap<String, Double>();
 		powertools = new HashMap<String, String>();
@@ -101,6 +103,7 @@ public class NexusPlayer {
 	public void setHome(String name, NexusHome home) { if(homes == null) homes = new HashMap<String, NexusHome>(); homes.put(name, home); }
 	public void setHomes(HashMap<String, NexusHome> homes) { if(homes == null) homes = new HashMap<String, NexusHome>(); this.homes = homes; }
 	public void setReply(String reply) { this.reply = reply; }
+	public void setSpy(boolean spy) { this.spy = spy; }
 	public void setTPA(HashMap<String, Double> tpa) { this.tpa = tpa; }
 	public void setTPAHere(HashMap<String, Double> tpahere) { this.tpahere = tpahere; }
 	public void setPowertools(HashMap<String, String> powertools) { this.powertools = powertools; }
@@ -128,6 +131,7 @@ public class NexusPlayer {
 	public NexusHome getHome(String name) { if(homes == null) homes = new HashMap<String, NexusHome>(); return homes.containsKey(name) ? homes.get(name) : null; }
 	public HashMap<String, NexusHome> getHomes() { if(homes == null) homes = new HashMap<String, NexusHome>(); return homes; }
 	public String getReply() { return reply; }
+	public boolean getSpy() { return spy; }
 	public HashMap<String, Double> getTPA() { return tpa; }
 	public HashMap<String, Double> getTPAHere() { return tpahere; }
 	public HashMap<Integer, List<Text>> getPages() { return pages; }

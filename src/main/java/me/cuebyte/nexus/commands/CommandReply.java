@@ -76,6 +76,18 @@ public class CommandReply implements CommandCallable {
 		sender.sendMessage(Text.of(TextColors.GOLD, "To ", target.getName(), ": ", TextColors.WHITE, message));
 		target.sendMessage(Text.of(TextColors.GOLD, "From ", sender.getName(), ": ", TextColors.WHITE, message));
 
+		for(Player t : Controller.getPlayers()) {
+			
+			if(sender.getName().equalsIgnoreCase(t.getName())) continue;
+			if(player.getName().equalsIgnoreCase(t.getName())) continue;
+			
+			if(!PermissionsUtils.has(t, "nexus.spy")) continue;
+			NexusPlayer s = NexusDatabase.getPlayer(t.getUniqueId().toString());
+			if(!s.getSpy()) continue;
+			
+			t.sendMessage(Text.of(TextColors.YELLOW, "Spy: ", TextColors.WHITE, sender.getName(), " -> ", player.getName(), ": ", TextColors.GRAY, message));
+		}
+		
 		return CommandResult.success();
 
 	}

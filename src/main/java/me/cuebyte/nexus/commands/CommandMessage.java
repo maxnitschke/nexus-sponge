@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import main.java.me.cuebyte.nexus.Controller;
 import main.java.me.cuebyte.nexus.customized.NexusDatabase;
 import main.java.me.cuebyte.nexus.customized.NexusMute;
 import main.java.me.cuebyte.nexus.customized.NexusPlayer;
@@ -68,6 +69,18 @@ public class CommandMessage implements CommandCallable {
 		
 		sender.sendMessage(Text.of(TextColors.GOLD, "To ", player.getName(), ": ", TextColors.WHITE, message));
 		player.sendMessage(Text.of(TextColors.GOLD, "From ", sender.getName(), ": ", TextColors.WHITE, message));
+		
+		for(Player t : Controller.getPlayers()) {
+			
+			if(sender.getName().equalsIgnoreCase(t.getName())) continue;
+			if(player.getName().equalsIgnoreCase(t.getName())) continue;
+			
+			if(!PermissionsUtils.has(t, "nexus.spy")) continue;
+			NexusPlayer s = NexusDatabase.getPlayer(t.getUniqueId().toString());
+			if(!s.getSpy()) continue;
+		
+			t.sendMessage(Text.of(TextColors.YELLOW, "Spy: ", TextColors.WHITE, sender.getName(), " -> ", player.getName(), ": ", TextColors.GRAY, message));
+		}
 
 		return CommandResult.success();
 

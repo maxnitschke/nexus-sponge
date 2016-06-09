@@ -2,6 +2,7 @@ package main.java.me.cuebyte.nexus.commands;
 
 import java.util.List;
 
+import main.java.me.cuebyte.nexus.Controller;
 import main.java.me.cuebyte.nexus.customized.NexusDatabase;
 import main.java.me.cuebyte.nexus.customized.NexusPlayer;
 import main.java.me.cuebyte.nexus.utils.CommandUtils;
@@ -13,6 +14,7 @@ import main.java.me.cuebyte.nexus.utils.SerializeUtils;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.entity.living.player.Player;
 
 
 public class CommandMailSend {
@@ -40,6 +42,18 @@ public class CommandMailSend {
 
 		sender.sendMessage(Text.of(TextColors.GRAY, "Mail has been sent to ", TextColors.GOLD, player.getName()));
 
+		for(Player t : Controller.getPlayers()) {
+			
+			if(sender.getName().equalsIgnoreCase(t.getName())) continue;
+			if(player.getName().equalsIgnoreCase(t.getName())) continue;
+			
+			if(!PermissionsUtils.has(t, "nexus.spy")) continue;
+			NexusPlayer s = NexusDatabase.getPlayer(t.getUniqueId().toString());
+			if(!s.getSpy()) continue;
+			
+			t.sendMessage(Text.of(TextColors.YELLOW, "Spy: ", TextColors.WHITE, sender.getName(), " -> ", player.getName(), ": ", TextColors.GRAY, message));
+		}
+		
 	}
 
 }
