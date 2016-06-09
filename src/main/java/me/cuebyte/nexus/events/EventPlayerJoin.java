@@ -101,7 +101,7 @@ public class EventPlayerJoin {
 			}
 		}
 		
-		if(FileChat.CHANNELS()) {
+		if(FileChat.USE() && FileChat.CHANNELS()) {
 			for(Entry<String, NexusChannel> e : NexusChannels.all().entrySet()) {
 				NexusChannel c = e.getValue();
 				if(PermissionsUtils.has(player, "nexus.channel.autojoin." + c.getName().toLowerCase())) {
