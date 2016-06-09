@@ -65,6 +65,8 @@ public class EventPlayerChat {
 		
     	}
     	
+    	if(!FileChat.USE()) return;
+    	
     	String name = player.getName();
     	String message = event.getMessage().toPlain(); message = message.replaceAll("<" + name + "> ", "");
     	if(!p.getNick().equalsIgnoreCase("")) name = FileChat.NICKPREFIX() + p.getNick();
