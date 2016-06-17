@@ -154,7 +154,7 @@ public class Nexus {
     	if(FileCommands.AFK()) game.getCommandManager().register(this, new CommandAFK(), "afk");
     	if(FileCommands.BAN()) game.getCommandManager().register(this, new CommandBan(), "ban");
     	if(FileCommands.BANLIST()) game.getCommandManager().register(this, new CommandBanlist(), "banlist");
-    	if(FileCommands.BROADCAST()) game.getCommandManager().register(this, new CommandBroadcast(), "broadcast");
+    	if(FileCommands.BROADCAST()) game.getCommandManager().register(this, new CommandBroadcast(), "broadcast", "bc", "say");
     	if(FileCommands.BUTCHER()) game.getCommandManager().register(this, new CommandButcher(), "butcher");
     	if(FileCommands.CHANNEL()) game.getCommandManager().register(this, new CommandChannel(), "channel", "ch", "c");
     	if(FileCommands.ENCHANT()) game.getCommandManager().register(this, new CommandEnchant(game), "enchant");

@@ -6,7 +6,6 @@ import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
 import main.java.me.cuebyte.nexus.utils.TextUtils;
 
 import org.spongepowered.api.command.CommandSource;
-
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 

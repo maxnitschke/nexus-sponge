@@ -6,22 +6,25 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
 
+import javax.annotation.Nullable;
+
 import main.java.me.cuebyte.nexus.Controller;
 import main.java.me.cuebyte.nexus.files.FileConfig;
 import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
 import main.java.me.cuebyte.nexus.utils.TextUtils;
 
 import org.spongepowered.api.Game;
-import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.service.permission.Subject;
-import org.spongepowered.api.service.permission.option.OptionSubject;
-import org.spongepowered.api.text.Text;
-
-import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.service.permission.Subject;
+import org.spongepowered.api.service.permission.option.OptionSubject;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
 
 
 public class CommandList implements CommandCallable {
@@ -118,7 +121,7 @@ public class CommandList implements CommandCallable {
 	@Override
 	public Optional<Text> getShortDescription(CommandSource sender) { return Optional.of(description); }
 	@Override
-	public List<String> getSuggestions(CommandSource sender, String args) throws CommandException { return suggestions; }
+	public List<String> getSuggestions(CommandSource arg0, String arg1,	@Nullable Location<World> arg2) throws CommandException { return suggestions; }
 	@Override
 	public boolean testPermission(CommandSource sender) { return permission.equals("") ? true : sender.hasPermission(permission); }
 

@@ -4,17 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
-import org.spongepowered.api.data.key.Keys;
-import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.text.Text;
+import javax.annotation.Nullable;
 
-import org.spongepowered.api.text.format.TextColors;
+import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
+
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
-
+import org.spongepowered.api.data.key.Keys;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
 
 public class CommandVanish implements CommandCallable {
 
@@ -36,14 +39,10 @@ public class CommandVanish implements CommandCallable {
 			
 			if(!b) {
 				p.offer(Keys.INVISIBLE, true);
-				p.offer(Keys.INVISIBILITY_IGNORES_COLLISION, true);
-				p.offer(Keys.INVISIBILITY_PREVENTS_TARGETING, true);
 				sender.sendMessage(Text.of(TextColors.GOLD, "You ", TextColors.GRAY, "are now invisible."));
 			}
 			else {
 				p.offer(Keys.INVISIBLE, false);
-				p.offer(Keys.INVISIBILITY_IGNORES_COLLISION, false);
-				p.offer(Keys.INVISIBILITY_PREVENTS_TARGETING, false);
 				sender.sendMessage(Text.of(TextColors.GOLD, "You ", TextColors.GRAY, "are no longer invisible."));
 			}
 			
@@ -60,15 +59,11 @@ public class CommandVanish implements CommandCallable {
 			
 			if(!b) {
 				p.offer(Keys.INVISIBLE, true);
-				p.offer(Keys.INVISIBILITY_IGNORES_COLLISION, true);
-				p.offer(Keys.INVISIBILITY_PREVENTS_TARGETING, true);
 				p.sendMessage(Text.of(TextColors.GRAY, "Invisibility enabled by ", TextColors.GOLD, sender.getName()));
 				sender.sendMessage(Text.of(TextColors.GOLD, p.getName(), TextColors.GRAY, " is now invisible."));
 			}
 			else {
 				p.offer(Keys.INVISIBLE, false);
-				p.offer(Keys.INVISIBILITY_IGNORES_COLLISION, false);
-				p.offer(Keys.INVISIBILITY_PREVENTS_TARGETING, false);
 				p.sendMessage(Text.of(TextColors.GRAY, "Invisibility disabled by ", TextColors.GOLD, sender.getName()));
 				sender.sendMessage(Text.of(TextColors.GOLD, p.getName(), TextColors.GRAY, " is no longer invisible."));
 			}
@@ -92,7 +87,7 @@ public class CommandVanish implements CommandCallable {
 	@Override
 	public Optional<Text> getShortDescription(CommandSource sender) { return Optional.of(description); }
 	@Override
-	public List<String> getSuggestions(CommandSource sender, String args) throws CommandException { return suggestions; }
+	public List<String> getSuggestions(CommandSource arg0, String arg1,	@Nullable Location<World> arg2) throws CommandException { return suggestions; }
 	@Override
 	public boolean testPermission(CommandSource sender) { return permission.equals("") ? true : sender.hasPermission(permission); }
 

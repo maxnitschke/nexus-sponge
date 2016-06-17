@@ -11,12 +11,11 @@ import main.java.me.cuebyte.nexus.customized.NexusPlayer;
 import main.java.me.cuebyte.nexus.customized.NexusTicket;
 import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
 
+import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
-
 import org.spongepowered.api.text.action.TextActions;
 import org.spongepowered.api.text.format.TextColors;
-import org.spongepowered.api.command.CommandSource;
 
 
 public class CommandTicketList {

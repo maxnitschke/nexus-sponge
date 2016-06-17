@@ -7,6 +7,7 @@ import main.java.me.cuebyte.nexus.customized.NexusDatabase;
 import main.java.me.cuebyte.nexus.customized.NexusPlayer;
 import main.java.me.cuebyte.nexus.utils.PermissionsUtils;
 
+import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.InteractEntityEvent;
@@ -22,9 +23,9 @@ public class EventPlayerInteractEntity {
     	Player player = (Player) event.getTargetEntity();
     	NexusPlayer p = NexusDatabase.getPlayer(player.getUniqueId().toString());
 
-    	if(player.getItemInHand().isPresent() && PermissionsUtils.has(player, "nexus.powertool")) {
+    	if(player.getItemInHand(HandTypes.MAIN_HAND).isPresent() && PermissionsUtils.has(player, "nexus.powertool")) {
 
-    		ItemStack i = player.getItemInHand().get();
+    		ItemStack i = player.getItemInHand(HandTypes.MAIN_HAND).get();
     		String id = i.getItem().getId().replaceAll("minecraft:", "");
 
     		HashMap<String, String> powertools = p.getPowertools();
@@ -43,9 +44,9 @@ public class EventPlayerInteractEntity {
     	Player player = (Player) event.getTargetEntity();
     	NexusPlayer p = NexusDatabase.getPlayer(player.getUniqueId().toString());
 
-    	if(player.getItemInHand().isPresent() && PermissionsUtils.has(player, "nexus.powertool")) {
+    	if(player.getItemInHand(HandTypes.MAIN_HAND).isPresent() && PermissionsUtils.has(player, "nexus.powertool")) {
 
-    		ItemStack i = player.getItemInHand().get();
+    		ItemStack i = player.getItemInHand(HandTypes.MAIN_HAND).get();
     		String id = i.getItem().getId().replaceAll("minecraft:", "");
 
     		HashMap<String, String> powertools = p.getPowertools();
